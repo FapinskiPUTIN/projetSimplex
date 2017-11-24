@@ -1,7 +1,7 @@
 package modele;
 
 public class Simplex {
-	private int lignePivot, colonnePivot;
+	private int lignePivot, colonnePivot, varinutile;
 	public Simplex() {
 		
 	}
