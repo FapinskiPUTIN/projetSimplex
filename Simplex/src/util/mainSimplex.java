@@ -51,7 +51,7 @@ public class mainSimplex {
 			
 		}
 			System.out.println(valCont);
-			
+			//salut
 		}
 		System.out.println("au revoir");
 		
