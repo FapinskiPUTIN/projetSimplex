@@ -13,8 +13,7 @@ public class mainSimplex {
 		nbVar = lc.nextInt();
 		System.out.println("Nombre de contraintes : ");
 		nbCont = lc.nextInt();
-		//PENISILIN
-		//Conflit
+		System.out.println("au revoir");
 		
 		
 	}
