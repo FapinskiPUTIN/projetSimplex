@@ -14,6 +14,7 @@ public class mainSimplex {
 		System.out.println("Nombre de contraintes : ");
 		nbCont = lc.nextInt();
 		//PENISILIN
+		//Conflit
 		
 		
 	}
