@@ -70,7 +70,7 @@ public class Simplex {
 			}
 		}
 		tmp+="] Z = "+Math.abs(m.get(m.size()-1).get(m.get(0).size()-1))+"\n\n";
-		return tmp;
+		return tmp;//
 	}
 	public boolean iteration(ArrayList<List<Double>> m) {
 		for(j=0;j<m.get(m.size()-1).size()-1;j++) {
