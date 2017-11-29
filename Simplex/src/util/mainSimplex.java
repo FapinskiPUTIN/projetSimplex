@@ -36,7 +36,7 @@ public class mainSimplex {
 		nbCont = lc.nextInt();
 		lc.nextLine();
 		
-		for(int i=0;i<nbCont;i++) {
+		for(int i=1;i<=nbCont;i++) {
 			System.out.println("Entrez les valeurs de cette manière (ex : 1 2 8 12 ...)");
 			valTemp=lc.nextLine();
 			/*System.out.println("Entrez la contrainte");
@@ -47,9 +47,11 @@ public class mainSimplex {
 				valInt[j]=Double.parseDouble(valeurs[j]);
 				System.out.println("val "+j+" : "+valInt[j]);	
 			}
-			m.creerLigne(valInt, i);
+			m.creerLigne(valInt, i, nbCont);
 		}
+		m.creerLigneZ(valZD, nbCont);
 		System.out.println(m.toString());
+		System.out.println(m.resoudre(nbVar, nbCont));
 		System.out.println("au revoir");
 	}
 
