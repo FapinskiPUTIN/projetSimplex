@@ -12,10 +12,11 @@ public class Simplex {
 	
 	public void colonnePivot(ArrayList<List<Double>> m, int nbVar) {
 		this.colonnePivot = 0;
-		int max = 0;
+		double max = 0;
 		for(i=0;i<nbVar;i++){
 			if(m.get(m.size()-1).get(i)>max) {
 				this.colonnePivot = i;
+				max = m.get(m.size()-1).get(i) ;
 			}
 		}
 	}
@@ -29,7 +30,6 @@ public class Simplex {
 				lignePivot = i;
 			}
 		}
-		System.out.println(lignePivot+";"+colonnePivot);
 	}
 	public void pivotUnitaire(ArrayList<List<Double>> m) {
 		double diviseur = m.get(lignePivot).get(colonnePivot);

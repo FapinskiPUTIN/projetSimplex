@@ -10,7 +10,7 @@ public class Matrice {
 		matrice = new ArrayList<>();
 		
 	}
-	public void creerLigne(double tabLigne[], int i, int nbContrainte) {
+	public void creerLigne(double tabLigne[], int i, int nbContrainte) throws ArrayIndexOutOfBoundsException{
 		int j;
 		List<Double> ligne = new ArrayList<Double>(); 
 		for(j = 0;j<tabLigne.length-1;j++) {
@@ -54,9 +54,7 @@ public class Matrice {
 			test.entrerBase(matrice, nbCont);
 			tmp += toString();
 			tmp += test.solutionBase(matrice, nbCont);
-			tmp += toString();
 			test2 = test.iteration(matrice);
-			tmp += toString();
 		}while(test2 != true);
 		return tmp;
 	}
