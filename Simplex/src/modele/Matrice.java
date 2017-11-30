@@ -5,10 +5,8 @@ import java.util.List;
 
 public class Matrice {
 	private ArrayList<List<Double>> matrice;
-	Simplex test = new Simplex();
 	public Matrice() {
 		matrice = new ArrayList<>();
-		
 	}
 	public void creerLigne(double tabLigne[], int i, int nbContrainte) throws ArrayIndexOutOfBoundsException{
 		int j;

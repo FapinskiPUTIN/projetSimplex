@@ -80,5 +80,7 @@ public class Simplex {
 		}
 		return true;
 	}
-	
+	public void resoudre() {
+		
+	}
 }
