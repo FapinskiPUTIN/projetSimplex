@@ -13,46 +13,55 @@ public class mainSimplex {
 		Scanner lc = new Scanner (System.in);
 		Matrice m = new Matrice();
 		int nbVar = 0, nbCont;
-		String valTemp;
+		String valTemp,tempFinal = "";
 		String valZTemp;
 		double valCont;
 		String temp[] ;
 
 		Serialisation s = new Serialisation();
 
-		System.out.println("Nombre de variables : ");
+		System.out.println("Nombre de variables : \n-------------------\n");
 		nbVar = lc.nextInt();
 		double[] valInt = new double[nbVar+1];
 		String valeurs[] = new String[nbVar+1];
 		lc.nextLine();
 
-		System.out.println("Entrez votre Z : ");
+		System.out.println("Entrez votre Z : \n----------------\n");
 		valZTemp=lc.nextLine();
 		String valZ[] = new String[nbVar+1];
 		double[] valZD = new double[nbVar+1];
 
 		valZ = valZTemp.split(" +");
 		
+		tempFinal+="Max Z = ";
 		for(int j=0;j<valZ.length;j++) {
-			valZD[j]=Double.parseDouble(valZ[j]);
-			System.out.println("val "+j+" : "+valZD[j]);
+			if(j<valZ.length-1) {
+			tempFinal+=valZD[j]=Double.parseDouble(valZ[j]);
+			tempFinal+="x"+(j+1)+" +";
+			}else {
+			tempFinal+=valZD[j]=Double.parseDouble(valZ[j]);
+			tempFinal+="x"+(j+1);
+			}
+			
+			System.out.println("val "+(j+1)+" : "+valZD[j]);
 		}
+		tempFinal+="\n";
+		
 
-		System.out.println("Nombre de contraintes : ");
+		System.out.println("Nombre de contraintes :\n-----------------\n ");
 		nbCont = lc.nextInt();
 		lc.nextLine();
 		temp= new String[nbCont];
 		
-		for(int i=1;i<=nbCont;i++) {
-			System.out.println("Entrez les valeurs de cette manière (ex : 1 2 8 12 ...)");
+		for(int i=0;i<nbCont;i++) {
+			System.out.println("Entrez les valeurs de cette manière (ex : 1 2 8 12 ...) : \n");
 			valTemp=lc.nextLine();
 
 			valeurs = valTemp.split(" +");
 			for(int j=0;j<valeurs.length;j++) {
 				valInt[j]=Double.parseDouble(valeurs[j]);
-				System.out.println("val "+j+" : "+valInt[j]);	
+				System.out.println("val "+(j+1)+" : "+valInt[j]);	
 			}
-<<<<<<< HEAD
 
 			
 			temp[i]="";
@@ -67,28 +76,20 @@ public class mainSimplex {
 				}
 			}	
 			m.creerLigne(valInt, i);
-=======
-			m.creerLigne(valInt, i, nbCont);
->>>>>>> branch 'master' of https://github.com/FapinskiPUTIN/projetSimplex
 		}
-		m.creerLigneZ(valZD, nbCont);
 		System.out.println(m.toString());
-<<<<<<< HEAD
 
 		for(int i=0;i<temp.length;i++) {
-			System.out.println(temp[i]); //Il affichera ici Null pour l'élément 0
-			s.ecrireFichierEnnonce("test1", temp[i]);
-			s.ecrireFichierTexteEnnonce("test1", temp[i]);
+			System.out.println("Contrainte"+(i+1)+temp[i]); //Il affichera ici Null pour l'élément 0
+			tempFinal+=temp[i]+"\n";
 
 		}
 
 		
-		
+		s.ecrireFichierEnnonce("test1", tempFinal);
+		s.ecrireFichierTexteEnnonce("test1", tempFinal);
 
 
-=======
-		System.out.println(m.resoudre(nbVar, nbCont));
->>>>>>> branch 'master' of https://github.com/FapinskiPUTIN/projetSimplex
 		System.out.println("au revoir");
 	}
 

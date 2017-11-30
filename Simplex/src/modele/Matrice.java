@@ -1,86 +1,68 @@
 package modele;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class Simplex {
-	private int lignePivot, colonnePivot, i, j;
-	public Simplex() {
+public class Matrice {
+	private ArrayList<List<Double>> matrice;
+	public Matrice() {
+		matrice = new ArrayList<>();
+	}
+	public void creerLigne(double tabLigne[], int i, int nbContrainte) throws ArrayIndexOutOfBoundsException{
+		int j;
+		List<Double> ligne = new ArrayList<Double>(); 
+		for(j = 0;j<tabLigne.length-1;j++) {
+			ligne.add(tabLigne[j]);
+		}
+		for(j=1;j<=nbContrainte;j++) {
+			if(j==i) {
+				ligne.add((double) 1);
+			}else {
+				ligne.add((double) 0);
+			}
+		}
+		ligne.add(tabLigne[tabLigne.length-1]);
+		matrice.add(ligne);
 		
 	}
-	
-	public void colonnePivot(ArrayList<List<Double>> m, int nbVar) {
-		this.colonnePivot = 0;
-		double max = 0;
-		for(i=0;i<nbVar;i++){
-			if(m.get(m.size()-1).get(i)>max) {
-				this.colonnePivot = i;
-				max = m.get(m.size()-1).get(i) ;
-			}
+	public void creerLigneZ(double tabLigneZ[], int nbContrainte) {
+		List<Double> ligne = new ArrayList<Double>();
+		for(int j = 0;j<tabLigneZ.length;j++) {
+			ligne.add(tabLigneZ[j]);
 		}
+		for(int j=1;j<=nbContrainte;j++) {
+			ligne.add((double) 0);
+		}
+		matrice.add(ligne);
 	}
-
-	public void lignePivot(ArrayList<List<Double>> m, int nbCont) {
-		this.lignePivot = 0;
-		double min = m.get(0).get(m.get(0).size()-1)/m.get(0).get(colonnePivot);
-		for(i=0;i<nbCont;i++) {
-			if(m.get(i).get(m.get(i).size()-1)/m.get(i).get(colonnePivot) <= min) {
-				min = m.get(0).get(m.get(0).size()-1)/m.get(0).get(colonnePivot);;
-				lignePivot = i;
-			}
-		}
+	public ArrayList<List<Double>> getMatrice() {
+		return matrice;
 	}
-	public void pivotUnitaire(ArrayList<List<Double>> m) {
-		double diviseur = m.get(lignePivot).get(colonnePivot);
-		for(i=0;i<=m.get(lignePivot).size()-1;i++) {
-			m.get(lignePivot).set(i, m.get(lignePivot).get(i)/diviseur);
-		}
+	public void setMatrice(ArrayList<List<Double>> matrice) {
+		this.matrice = matrice;
 	}
-	public void entrerBase(ArrayList<List<Double>> m, int nbCont) {
-		double multi;
-		for(i=0;i<=nbCont;i++) {
-			multi = m.get(i).get(colonnePivot);
-			if(i!=lignePivot) {
-				while(m.get(i).get(colonnePivot)!=0) {
-					for(j=0;j<m.get(i).size();j++) {
-						m.get(i).set(j,m.get(i).get(j)-(multi*m.get(lignePivot).get(j)));
-					}
-				}	
-			}
-		}
-	}
-	public String solutionBase(ArrayList<List<Double>> m, int nbCont) {
-		String tmp="[";
-		int flag = 0, cpteur;
-		for(j=0;j<m.get(0).size()-1;j++) {
-			cpteur = 0;
-			for(i=0;i<m.size()-1;i++) {
-				if(m.get(i).get(j)==1 || m.get(i).get(j) == 0) {
-					cpteur++; 
-					if(m.get(i).get(j)==1) {
-						flag = i;
-					}
-				}
-			}
-			if(cpteur == nbCont) {
-				tmp+=" "+m.get(flag).get(m.get(flag).size()-1)+" ";
-			}else {
-				tmp+=" 0 ";
-			}
-		}
-		tmp+="] Z = "+Math.abs(m.get(m.size()-1).get(m.get(0).size()-1))+"\n\n";
+	public String resoudre(int nbVar, int nbCont) {
+		String tmp = "";
+		boolean test2;
+		do {
+			test.colonnePivot(matrice, nbVar);
+			test.lignePivot(matrice, nbCont);
+			test.pivotUnitaire(matrice);
+			tmp += toString();
+			test.entrerBase(matrice, nbCont);
+			tmp += toString();
+			tmp += test.solutionBase(matrice, nbCont);
+			test2 = test.iteration(matrice);
+		}while(test2 != true);
 		return tmp;
 	}
-	public boolean iteration(ArrayList<List<Double>> m) {
-		for(j=0;j<m.get(m.size()-1).size()-1;j++) {
-			if(m.get(m.size()-1).get(j)>0) {
-				return false;
-			}
+	@Override
+	public String toString() {
+		String tmp = "";
+		for(int i = 0;i < matrice.size();i++) {
+			tmp+=matrice.get(i)+"\n";
 		}
-		return true;
+		return tmp+"\n";
 	}
-	public void resoudre() {
-		
-	}
+	
 }
