@@ -43,7 +43,7 @@ public class mainSimplex {
 		lc.nextLine();
 		temp= new String[nbCont];
 		
-		for(int i=0;i<nbCont;i++) {
+		for(int i=1;i<=nbCont;i++) {
 			System.out.println("Entrez les valeurs de cette manière (ex : 1 2 8 12 ...)");
 			valTemp=lc.nextLine();
 
@@ -52,6 +52,7 @@ public class mainSimplex {
 				valInt[j]=Double.parseDouble(valeurs[j]);
 				System.out.println("val "+j+" : "+valInt[j]);	
 			}
+<<<<<<< HEAD
 
 			
 			temp[i]="";
@@ -66,8 +67,13 @@ public class mainSimplex {
 				}
 			}	
 			m.creerLigne(valInt, i);
+=======
+			m.creerLigne(valInt, i, nbCont);
+>>>>>>> branch 'master' of https://github.com/FapinskiPUTIN/projetSimplex
 		}
+		m.creerLigneZ(valZD, nbCont);
 		System.out.println(m.toString());
+<<<<<<< HEAD
 
 		for(int i=0;i<temp.length;i++) {
 			System.out.println(temp[i]); //Il affichera ici Null pour l'élément 0
@@ -80,6 +86,9 @@ public class mainSimplex {
 		
 
 
+=======
+		System.out.println(m.resoudre(nbVar, nbCont));
+>>>>>>> branch 'master' of https://github.com/FapinskiPUTIN/projetSimplex
 		System.out.println("au revoir");
 	}
 
